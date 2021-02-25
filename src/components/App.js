@@ -5,21 +5,21 @@ class App extends React.Component {
     contacts: [
       {
         id: "tyler",
-        name: "Tyler McGinnis",
-        handle: "@tylermcginnis",
-        avatarURL: "http://localhost:5001/tyler.jpg",
+        name: "Ahmad Ramzy",
+        handle: "@amazingramzy",
+        avatarURL: "http://localhost:5001/ramzy.jpg",
       },
       {
         id: "karen",
-        name: "Karen Isgrigg",
-        handle: "@karen_isgrigg",
-        avatarURL: "http://localhost:5001/karen.jpg",
+        name: "Rick & Morty",
+        handle: "@rickandmorty",
+        avatarURL: "http://localhost:5001/rickkkkkkkkkk.png",
       },
       {
         id: "richard",
-        name: "Richard Kalehoff",
-        handle: "@richardkalehoff",
-        avatarURL: "http://localhost:5001/richard.jpg",
+        name: "Colossal titan",
+        handle: "@BertholdtHoover",
+        avatarURL: "http://localhost:5001/titan.png",
       },
     ],
   };
