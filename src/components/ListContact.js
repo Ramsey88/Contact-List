@@ -1,5 +1,6 @@
 import { PropTypes } from "prop-types";
 import React from "react";
+import { Link } from "react-router-dom";
 class ListContact extends React.Component {
   static protoTypes = {
     contact: PropTypes.array.isRequired,
@@ -35,6 +36,9 @@ class ListContact extends React.Component {
             value={query}
             onChange={(event) => this.updateQuery(event.target.value)}
           />
+          <Link to="/create" className="add-contact">
+            Add
+          </Link>
         </div>
         {showingContacts.length !== contacts.length && (
           <div className="showing-contacts">

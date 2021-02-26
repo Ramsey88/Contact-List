@@ -1,27 +1,25 @@
 import React from "react";
 import ListContact from "./ListContact";
+import * as ContactsAPI from ".././utils/ContactsAPI";
+import CreateContact from "./CreateContact";
+import { Route } from "react-router-dom";
 class App extends React.Component {
   state = {
-    contacts: [
-      {
-        id: "tyler",
-        name: "Ahmad Ramzy",
-        handle: "@amazingramzy",
-        avatarURL: "http://localhost:5001/ramzy.jpg",
-      },
-      {
-        id: "karen",
-        name: "Rick & Morty",
-        handle: "@rickandmorty",
-        avatarURL: "http://localhost:5001/rickkkkkkkkkk.png",
-      },
-      {
-        id: "richard",
-        name: "Colossal titan",
-        handle: "@BertholdtHoover",
-        avatarURL: "http://localhost:5001/titan.png",
-      },
-    ],
+    contacts: [],
+  };
+  componentDidMount() {
+    ContactsAPI.getAll().then((contacts) => {
+      this.setState(() => ({
+        contacts,
+      }));
+    });
+  }
+  createContact = (contact) => {
+    ContactsAPI.create(contact).then((contact) => {
+      this.setState((currentState) => ({
+        contacts: currentState.contacts.concat([contact]),
+      }));
+    });
   };
   removeContact = (contact) => {
     this.setState((currentState) => ({
@@ -29,13 +27,33 @@ class App extends React.Component {
         return c.id !== contact.id;
       }),
     }));
+    ContactsAPI.remove(contact);
   };
   render() {
     return (
-      <ListContact
-        contacts={this.state.contacts}
-        onDeleteContact={this.removeContact}
-      />
+      <div>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <ListContact
+              contacts={this.state.contacts}
+              onDeleteContact={this.removeContact}
+            />
+          )}
+        />
+        <Route
+          path="/create"
+          render={({ history }) => (
+            <CreateContact
+              onCreateContact={(contact) => {
+                this.createContact(contact);
+                history.push("/");
+              }}
+            />
+          )}
+        />
+      </div>
     );
   }
 }
